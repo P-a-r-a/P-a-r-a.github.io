@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-deep: #0a1628;
+      --blue-mid: #0f2456;
+      --blue-bright: #1a3a8f;
+      --blue-accent: #2563eb;
+      --blue-glow: #3b82f6;
+      --white: #ffffff;
+      --white-dim: rgba(255,255,255,0.6);
+      --white-faint: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--blue-deep);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--blue-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-accent); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+      padding: 1.5rem 3rem;
+      background: linear-gradient(to bottom, rgba(10,22,40,0.9), transparent);
+      backdrop-filter: blur(4px);
+    }
+
+    nav a {
+      color: var(--white-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--white); }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.15) 0%, transparent 50%),
+        linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 60%, var(--blue-bright) 100%);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Decorative rings */
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(59,130,246,0.12);
+      pointer-events: none;
+    }
+    .ring-1 { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .ring-2 { width: 750px; height: 750px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .ring-3 { width: 1000px; height: 1000px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue-glow);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--white-dim);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
+      opacity: 0;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--blue-glow), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ── SECTION SHARED ── */
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--blue-glow);
+      margin-bottom: 1rem;
+      opacity: 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      text-align: center;
+      opacity: 0;
+    }
+
+    /* ── PROJECTS ── */
+    #projects {
+      background:
+        radial-gradient(ellipse at 70% 80%, rgba(37,99,235,0.12) 0%, transparent 60%),
+        var(--blue-deep);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .project-card {
+      background: var(--white-faint);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+      opacity: 0;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,235,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .project-card:hover { border-color: rgba(59,130,246,0.5); transform: translateY(-4px); }
+    .project-card:hover::before { opacity: 1; }
+
+    .project-number {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--blue-glow);
+      margin-bottom: 1rem;
+    }
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc { color: var(--white-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.15);
+      color: var(--blue-glow);
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    /* ── SKILLS & HOBBIES ── */
+    #skills {
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(26,58,143,0.3) 0%, transparent 60%),
+        var(--blue-deep);
+    }
+
+    .skills-container {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 640px) { .skills-container { grid-template-columns: 1fr; } }
+
+    .skills-col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      opacity: 0;
+    }
+
+    .skill-item {
+      margin-bottom: 1.25rem;
+      opacity: 0;
+    }
+    .skill-top { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+    .skill-name { font-size: 0.9rem; color: var(--white-dim); }
+    .skill-pct { font-size: 0.8rem; color: var(--blue-glow); }
+    .skill-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--blue-accent), var(--blue-glow));
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    .hobby-list { list-style: none; }
+    .hobby-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--white-faint);
+      color: var(--white-dim);
+      font-size: 0.9rem;
+      opacity: 0;
+    }
+    .hobby-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue-glow);
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(37,99,235,0.2) 0%, transparent 60%),
+        var(--blue-deep);
+      text-align: center;
+    }
+
+    .contact-desc {
+      color: var(--white-dim);
+      font-size: 1.1rem;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      opacity: 0;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-btn.primary {
+      background: var(--blue-accent);
+      color: var(--white);
+      border: 1px solid var(--blue-accent);
+    }
+    .contact-btn.secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
+
+    .footer {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+
+    <p class="hero-eyebrow">Welcome to my portfolio</p>
+    <h1 class="hero-name">Your Name Here</h1>
+    <p class="hero-desc">A short description about who you are, what you do, and what you're passionate about. Keep it genuine and concise.</p>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">What I've built</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="project-number">01</p>
+        <h3 class="project-name">Project One</h3>
+        <p class="project-desc">A brief description of what this project does, the problem it solves, and what you learned building it.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-number">02</p>
+        <h3 class="project-name">Project Two</h3>
+        <p class="project-desc">A brief description of what this project does, the problem it solves, and what you learned building it.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">API</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-number">03</p>
+        <h3 class="project-name">Project Three</h3>
+        <p class="project-desc">A brief description of what this project does, the problem it solves, and what you learned building it.</p>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS & HOBBIES -->
+  <section id="skills">
+    <p class="section-label">What I know & love</p>
+    <h2 class="section-title">Skills & Hobbies</h2>
+    <div class="skills-container">
+
+      <div class="skills-col">
+        <h3>Technical Skills</h3>
+
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">HTML & CSS</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">JavaScript</span><span class="skill-pct">75%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">Python</span><span class="skill-pct">65%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">Git & GitHub</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+        </div>
+      </div>
+
+      <div class="skills-col">
+        <h3>Hobbies</h3>
+        <ul class="hobby-list">
+          <li class="hobby-item"><div class="hobby-dot"></div>Photography & visual storytelling</li>
+          <li class="hobby-item"><div class="hobby-dot"></div>Reading sci-fi and tech books</li>
+          <li class="hobby-item"><div class="hobby-dot"></div>Open source contributions</li>
+          <li class="hobby-item"><div class="hobby-dot"></div>Hiking and outdoor adventures</li>
+          <li class="hobby-item"><div class="hobby-dot"></div>Building side projects</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-title">Contact Me</h2>
+    <p class="contact-desc">Whether you have a project in mind, a question, or just want to say hello — my inbox is always open.</p>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-btn primary">✉ Send an Email</a>
+      <a href="https://github.com/yourusername" target="_blank" class="contact-btn secondary">⌥ GitHub</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-btn secondary">in LinkedIn</a>
+    </div>
+    <p class="footer">Built with HTML, CSS & GSAP · 2025</p>
+  </section>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ── HERO ANIMATIONS ──
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .to('.hero-eyebrow', { opacity: 1, y: 0, duration: 0.8, delay: 0.3 })
+      .to('.hero-name',    { opacity: 1, y: 0, duration: 0.9 }, '-=0.4')
+      .to('.hero-desc',    { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+      .to('.scroll-hint',  { opacity: 1, duration: 0.6 }, '-=0.2');
+
+    // Set initial positions
+    gsap.set(['.hero-eyebrow', '.hero-name', '.hero-desc', '.scroll-hint'], { y: 30 });
+
+    // ── SECTION LABELS & TITLES ──
+    gsap.utils.toArray('.section-label').forEach(el => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.6,
+        scrollTrigger: { trigger: el, start: 'top 85%' }
+      });
+      gsap.set(el, { y: 20 });
+    });
+
+    gsap.utils.toArray('.section-title').forEach(el => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.8,
+        scrollTrigger: { trigger: el, start: 'top 85%' }
+      });
+      gsap.set(el, { y: 30 });
+    });
+
+    // ── PROJECT CARDS ──
+    gsap.set('.project-card', { y: 40 });
+    gsap.utils.toArray('.project-card').forEach((card, i) => {
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 0.7,
+        delay: i * 0.15,
+        scrollTrigger: { trigger: card, start: 'top 88%' }
+      });
+    });
+
+    // ── SKILLS COL HEADINGS ──
+    gsap.set('.skills-col h3', { y: 20 });
+    gsap.utils.toArray('.skills-col h3').forEach((el, i) => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.6, delay: i * 0.2,
+        scrollTrigger: { trigger: el, start: 'top 85%' }
+      });
+    });
+
+    // ── SKILL BARS ──
+    gsap.set('.skill-item', { y: 15 });
+    gsap.utils.toArray('.skill-item').forEach((item, i) => {
+      const fill = item.querySelector('.skill-fill');
+      const targetWidth = fill.dataset.width + '%';
+      gsap.to(item, {
+        opacity: 1, y: 0, duration: 0.5, delay: i * 0.1,
+        scrollTrigger: { trigger: item, start: 'top 90%' }
+      });
+      ScrollTrigger.create({
+        trigger: item,
+        start: 'top 90%',
+        onEnter: () => { fill.style.width = targetWidth; }
+      });
+    });
+
+    // ── HOBBY ITEMS ──
+    gsap.set('.hobby-item', { x: -20 });
+    gsap.utils.toArray('.hobby-item').forEach((item, i) => {
+      gsap.to(item, {
+        opacity: 1, x: 0, duration: 0.5, delay: i * 0.1,
+        scrollTrigger: { trigger: item, start: 'top 90%' }
+      });
+    });
+
+    // ── CONTACT ──
+    gsap.set(['.contact-desc', '.contact-links'], { y: 25 });
+    gsap.to('.contact-desc', {
+      opacity: 1, y: 0, duration: 0.8,
+      scrollTrigger: { trigger: '.contact-desc', start: 'top 85%' }
+    });
+    gsap.to('.contact-links', {
+      opacity: 1, y: 0, duration: 0.8, delay: 0.2,
+      scrollTrigger: { trigger: '.contact-links', start: 'top 85%' }
+    });
+
+    // ── RING SUBTLE ROTATION ──
+    gsap.to('.ring-1', { rotation: 360, duration: 30, repeat: -1, ease: 'none' });
+    gsap.to('.ring-2', { rotation: -360, duration: 45, repeat: -1, ease: 'none' });
+    gsap.to('.ring-3', { rotation: 360, duration: 60, repeat: -1, ease: 'none' });
+  </script>
+
+</body>
+</html>
