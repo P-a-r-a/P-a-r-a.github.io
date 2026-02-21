@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ── LOADING SCREEN ── -->
+  <div id="loading-screen">
+    <div class="loader-name">
+      <span>Your</span>&nbsp;<span>Name</span>
+    </div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loader-bar"></div>
+    </div>
+    <div class="loader-pct" id="loader-pct">0%</div>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="main-nav" style="opacity:0">
+    <a class="nav-logo" href="#hero">YN</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── GAME MODE BUTTON (fixed, visible on all pages) ── -->
+  <a id="game-mode-btn" href="game.html">
+    <span class="btn-icon"></span>
+    Game Mode
+  </a>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="hero">
+    <p class="hero-tag">Portfolio · 2025</p>
+    <h1 class="hero-name">
+      <span class="line"><span>Your</span></span>
+      <span class="line"><span>Name.</span></span>
+    </h1>
+    <p class="hero-desc">
+      A short, punchy description of who you are and what you do.
+      Computer Science student · Web developer · Problem solver.
+    </p>
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PROJECTS ══════════════ -->
+  <section id="projects">
+    <span class="section-tag">Work</span>
+    <h2 class="section-heading">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">01</p>
+        <h3 class="project-title">Project Alpha</h3>
+        <p class="project-desc">A short description of what this project does, the problem it solves, and what you learned while building it.</p>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">02</p>
+        <h3 class="project-title">Project Beta</h3>
+        <p class="project-desc">A short description of what this project does, the problem it solves, and what you learned while building it.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">FastAPI</span>
+          <span class="project-tag">PostgreSQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">03</p>
+        <h3 class="project-title">Project Gamma</h3>
+        <p class="project-desc">A short description of what this project does, the problem it solves, and what you learned while building it.</p>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">04</p>
+        <h3 class="project-title">Project Delta</h3>
+        <p class="project-desc">A short description of what this project does, the problem it solves, and what you learned while building it.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Dart</span>
+          <span class="project-tag">Firebase</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ SKILLS ══════════════ -->
+  <section id="skills">
+    <span class="section-tag">Expertise</span>
+    <h2 class="section-heading">Skills</h2>
+    <div class="skills-cols">
+
+      <!-- Technical -->
+      <div>
+        <p class="skills-group-title">Technical</p>
+
+        <div class="skill" data-skill="html-css" data-target="90">
+          <div class="skill-top"><span class="skill-name">HTML & CSS</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="javascript" data-target="80">
+          <div class="skill-top"><span class="skill-name">JavaScript</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="python" data-target="75">
+          <div class="skill-top"><span class="skill-name">Python</span><span class="skill-pct">75%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="react" data-target="70">
+          <div class="skill-top"><span class="skill-name">React</span><span class="skill-pct">70%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="git" data-target="85">
+          <div class="skill-top"><span class="skill-name">Git & GitHub</span><span class="skill-pct">85%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="sql" data-target="65">
+          <div class="skill-top"><span class="skill-name">SQL / Databases</span><span class="skill-pct">65%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+      </div>
+
+      <!-- Soft Skills -->
+      <div>
+        <p class="skills-group-title">Soft Skills</p>
+
+        <div class="skill" data-skill="problem-solving" data-target="90">
+          <div class="skill-top"><span class="skill-name">Problem Solving</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="communication" data-target="80">
+          <div class="skill-top"><span class="skill-name">Communication</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="teamwork" data-target="85">
+          <div class="skill-top"><span class="skill-name">Teamwork</span><span class="skill-pct">85%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="adaptability" data-target="80">
+          <div class="skill-top"><span class="skill-name">Adaptability</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="creativity" data-target="85">
+          <div class="skill-top"><span class="skill-name">Creativity</span><span class="skill-pct">85%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+        <div class="skill" data-skill="time-management" data-target="75">
+          <div class="skill-top"><span class="skill-name">Time Management</span><span class="skill-pct">75%</span></div>
+          <div class="skill-bar"><div class="skill-fill"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ CONTACT ══════════════ -->
+  <section id="contact">
+    <span class="section-tag">Connect</span>
+    <h2 class="section-heading">Get in Touch</h2>
+    <p class="contact-tagline">Whether it's a project, an opportunity, or just a hello — my inbox is always open.</p>
+    <div class="contact-links">
+
+      <a class="contact-link" href="mailto:your@email.com">
+        <div class="contact-link-icon">✉</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-main">your@email.com</span>
+        </div>
+      </a>
+
+      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank">
+        <div class="contact-link-icon">in</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-main">linkedin.com/in/yourprofile</span>
+        </div>
+      </a>
+
+      <a class="contact-link" href="https://github.com/yourusername" target="_blank">
+        <div class="contact-link-icon">⌥</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-main">github.com/yourusername</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>Built with HTML · CSS · JavaScript · 2025</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
